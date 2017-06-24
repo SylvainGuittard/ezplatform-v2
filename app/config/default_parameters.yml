@@ -1,0 +1,20 @@
+# This file contains defaults for optional parameters, which you can override in parameters.yml
+parameters:
+    locale_fallback: en
+
+    # Setting for mail system, used by SwiftMailer
+    env(MAILER_HOST):       127.0.0.1
+    env(MAILER_USER):       ~
+    env(MAILER_PASSWORD):   ~
+
+    # One of `legacy` (default) or `solr`
+    env(SEARCH_ENGINE): legacy
+
+    # Solr root endpoint, relevant if `solr` is set as search_engine
+    env(SOLR_DSN): http://localhost:8983/solr
+
+    # Log path, where to store the log files. php://stderr may be used in order to log to standard error
+    env(LOG_PATH): "%kernel.logs_dir%/%kernel.environment%.log"
+
+    # Settings for Cache pool, to change add own cache service and optionally inject own arguments
+    env(CACHE_POOL): "cache.app"
