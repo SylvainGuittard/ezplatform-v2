@@ -8,7 +8,7 @@
 name: app
 
 # The type of the application to build.
-type: php:7.0
+type: php:7.1
 build:
     # "none" means we're running composer manually, see build hook
     flavor: "none"
@@ -50,7 +50,7 @@ hooks:
         if [ -z "$SYMFONY_ENV" ]; then
             export SYMFONY_ENV=prod
         fi
-        bin/console --env=$SYMFONY_ENV assetic:dump
+        bin/console --env=prod assetic:dump
     deploy: |
         set -e
         . ./.env
@@ -58,11 +58,11 @@ hooks:
             export SYMFONY_ENV=prod
         fi
         if [ ! -f web/var/.platform.installed ]; then
-            php -d memory_limit=-1 bin/console ezplatform:install --env=$SYMFONY_ENV $INSTALL_EZ_INSTALL_TYPE
+            php -d memory_limit=-1 bin/console ezplatform:install --env=prod
             touch web/var/.platform.installed
         fi
-        composer update --no-dev --prefer-dist
-        bin/console --env=$SYMFONY_ENV cache:clear
+        #composer update --no-dev --prefer-dist
+        bin/console --env=prod cache:clear
 
 # The configuration of scheduled execution.
 # see http://symfony.com/doc/current/components/console/introduction.html
